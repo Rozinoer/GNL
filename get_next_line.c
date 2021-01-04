@@ -28,10 +28,15 @@ void str_join(char **line,char **buf)
 	char *tmp;
 
 	tmp = *line;
-	*line = ft_strjoin(*line,*buf);
+	*line = ft_strjoin(*line, *buf);
 	free(tmp);
+	free(*buf);
 }
-
+int back(char **buf)
+{
+	free(*buf);
+	return (-1);
+}
 int     get_next_line(int fd, char **line)
 {
 	char            *buf;
@@ -40,16 +45,14 @@ int     get_next_line(int fd, char **line)
 	static char     *remainder;
 
 	byte_was_read = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || !(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	p_n = check_remainder(remainder, line);
 	while (!p_n && byte_was_read !=0 )
 	{
-		if((byte_was_read = read(fd, buf, BUFFER_SIZE)) == -1)
-		{
-			free(buf);
-			return (-1);
-		}
+		if(!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1)))
+		|| (byte_was_read = read(fd, buf, BUFFER_SIZE)) == -1)
+			return (back(&buf));
 		buf[byte_was_read] = '\0';
 		if ((p_n = ft_strchr(buf,'\n')))
 		{

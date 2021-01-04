@@ -21,9 +21,7 @@ char	*ft_strchr(const char *s, int c)
 
 void	ft_strclr(char *s)
 {
-    if (s)
-        while (*s)
-            *s++ = '\0';
+	free(s);
 }
 
 char    *ft_strnew(size_t i)
@@ -68,8 +66,7 @@ char	*ft_strdup(char *src)
 {
     char *dst;
 
-    dst = (char*)malloc(ft_strlen(src) + 1);
-    if (dst == NULL)
+    if(!(dst = (char*)malloc(ft_strlen(src) + 1)))
         return (NULL);
     ft_strcpy(dst, src);
     return (dst);
