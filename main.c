@@ -8,7 +8,7 @@ int main() {
     int i;
     int j = 0;
 
-	fd = open("/Users/evgenii/Desktop/CLion/GNL/text.txt", O_RDONLY);
+	fd = open("/Users/dmyesha/Desktop/MyGit/GNL/text.txt", O_RDONLY);
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		printf("|%s\n", line);
@@ -26,18 +26,7 @@ int main() {
 		printf("\nRight number of lines\n");
 	else
 		printf("\nNot Good - Wrong Number Of Lines-[%d]\n",j);
-	sleep(10);
+//	sleep(10);
 	return 0;
 
-//		int		j;
-//		char	*line = 0;
-//
-//		j = 1;
-//		while (get_next_line(0, &line) > 0)
-//		{
-//			printf("%s\n", line);
-//			free(line);
-//			j++;
-//		}
-//		free(line);
 }
