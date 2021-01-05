@@ -36,26 +36,14 @@ char	*check_remainder(char *reaminder, char **line)
 	return (p_n);
 }
 
-char	*str_join(char **line, char **buf, char **p_n)
+void	str_join(char **line, char **buf)
 {
 	char *tmp;
-	char *remainder = NULL;
 
-	if ((p_n = (char **) ft_strchr((const char *) buf, '\n')))
-	{
-		**p_n = '\0';
-		++p_n;
-		tmp = remainder;
-		remainder = ft_strdup((char *) p_n);
-		free(tmp);
-	} else
-	{
-		tmp = *line;
-		*line = ft_strjoin(*line, *buf);
-		free(tmp);
-		free(*buf);
-	}
-	return remainder;
+	tmp = *line;
+	*line = ft_strjoin(*line, *buf);
+	free(tmp);
+	free(*buf);
 }
 
 int		back(char **buf)
@@ -70,7 +58,7 @@ int		get_next_line(int fd, char **line)
 	int				byte_was_read;
 	char			*p_n;
 	static char		*remainder;
-//	char *tmp;
+	char *tmp;
 
 	byte_was_read = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
@@ -82,15 +70,15 @@ int		get_next_line(int fd, char **line)
 		|| (byte_was_read = read(fd, buf, BUFFER_SIZE)) == -1)
 			return (back(&buf));
 		buf[byte_was_read] = '\0';
-//		if ((p_n = ft_strchr(buf, '\n')))
-//		{
-//			*p_n = '\0';
-//			++p_n;
-//			tmp = remainder;
-//			remainder = ft_strdup(p_n);
-//			free(tmp);
-//		}
-		remainder = str_join(line, &buf,&p_n);
+		if ((p_n = ft_strchr(buf, '\n')))
+		{
+			*p_n = '\0';
+			++p_n;
+			tmp = remainder;
+			remainder = ft_strdup(p_n);
+			free(tmp);
+		}
+		str_join(line, &buf);
 	}
 	return ((byte_was_read == 0) ? 0 : 1);
 }
