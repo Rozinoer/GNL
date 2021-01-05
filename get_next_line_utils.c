@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-
+#include <stdio.h>
 char	*ft_strchr(const char *s, int c)
 {
     unsigned char sym;
@@ -68,10 +68,15 @@ char	*ft_strdup(char *src)
 {
     char *dst;
 
-    dst = (char*)malloc(sizeof(char)*ft_strlen(src) + 1);
+	printf("sizeof(dst) before strdup = %lu\n",sizeof(dst));
+    if (ft_strlen(src)>0)
+	    dst = (char *)malloc((ft_strlen(src) + 1));
+    else
+    	dst = NULL;
     if (dst == NULL)
         return (NULL);
     ft_strcpy(dst, src);
+	printf("ft_strlen(src) = %zu\nsizeof(dst) after strdup = %lu\n",ft_strlen(src),ft_strlen(dst)*sizeof(dst));
     return (dst);
 }
 
