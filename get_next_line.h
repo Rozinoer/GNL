@@ -1,7 +1,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 10
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>

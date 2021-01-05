@@ -48,7 +48,7 @@ int     get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	p_n = check_remainder(remainder, line);
-	while (!p_n && byte_was_read !=0 )
+	while (!p_n && byte_was_read > 0 )
 	{
 		if(!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1)))
 		|| (byte_was_read = read(fd, buf, BUFFER_SIZE)) == -1)
@@ -59,6 +59,7 @@ int     get_next_line(int fd, char **line)
 			*p_n = '\0';
 			++p_n;
 			remainder = ft_strdup(p_n);
+
 		}
 		str_join(line,&buf);
 	}
