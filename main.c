@@ -26,7 +26,7 @@ int main() {
 		printf("\nRight number of lines\n");
 	else
 		printf("\nNot Good - Wrong Number Of Lines-[%d]\n",j);
-	//sleep(10);
+	sleep(10);
 	return 0;
 
 //		int		j;

@@ -17,6 +17,8 @@ char    *check_remainder(char *reaminder, char **line)
 		{
 			*line = ft_strdup(reaminder);
 			ft_strclr(reaminder);
+			free(reaminder);
+			reaminder = NULL;
 		}
 	else
 		*line = ft_strnew(1);
