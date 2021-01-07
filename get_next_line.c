@@ -39,16 +39,21 @@ char	*check_remainder(char *reaminder, char **line)
 void	str_join(char **line, char **buf)
 {
 	char *tmp;
+	char *tmp1;
 
+	tmp1 = *buf;
 	tmp = *line;
 	*line = ft_strjoin(*line, *buf);
 	free(tmp);
-	free(*buf);
+	free(tmp1);
 }
 
 int		back(char **buf)
 {
-	free(*buf);
+	char *tmp;
+
+	tmp = *buf;
+	free(tmp);
 	return (-1);
 }
 
@@ -84,5 +89,13 @@ int		get_next_line(int fd, char **line)
 			ream(&p_n,&remainder);
 		str_join(line, &buf);
 	}
+	if (buf && *buf)
+		printf("buffer = %s\n",buf);
+	else
+		printf("buffer is clean\n");
+	if (remainder && *remainder)
+		printf("reaminder = %s\n",remainder);
+	else
+		printf("reaminder is clean\n");
 	return ((byte_was_read == 0) ? 0 : 1);
 }

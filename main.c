@@ -8,14 +8,14 @@ int main() {
     int i;
     int j = 0;
 
-	fd = open("/Users/dmyesha/Desktop/MyGit/GNL/text.txt", O_RDONLY);
+	fd = open("/Users/evgenii/Desktop/CLion/GNL/text.txt", O_RDONLY);
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-		printf("|%s\n", line);
+		printf("%d |%s\n", i, line);
 		free(line);
 		j++;
 	}
-	printf("|%s\n", line);
+	printf("%d |%s\n", i, line);
 	j++;
 	free(line);
 	close(fd);
@@ -26,7 +26,7 @@ int main() {
 		printf("\nRight number of lines\n");
 	else
 		printf("\nNot Good - Wrong Number Of Lines-[%d]\n",j);
-	sleep(10);
+//	sleep(10);
 	return 0;
 
 }
