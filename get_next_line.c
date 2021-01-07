@@ -22,12 +22,12 @@ char	*check_remainder(char *reaminder, char **line)
 		if ((p_n = ft_strchr(reaminder, '\n')))
 		{
 			*p_n = '\0';
-			*line = ft_strdup(reaminder);
+			*line = ft_strjoin(reaminder, "");
 			ft_strcpy(reaminder, ++p_n);
 		}
 		else
 		{
-			*line = ft_strdup(reaminder);
+			*line = ft_strjoin(reaminder, "");
 			while (*reaminder)
 				*reaminder++ = '\0';
 		}
@@ -52,13 +52,23 @@ int		back(char **buf)
 	return (-1);
 }
 
+void    ream(char **p_n, char **reaminder)
+{
+	char *tmp;
+
+	**p_n = '\0';
+	++*p_n;
+	tmp = *reaminder;
+	*reaminder = ft_strjoin(*p_n, "");
+	free(tmp);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	char			*buf;
 	int				byte_was_read;
 	char			*p_n;
 	static char		*remainder;
-	char *tmp;
 
 	byte_was_read = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
@@ -71,13 +81,7 @@ int		get_next_line(int fd, char **line)
 			return (back(&buf));
 		buf[byte_was_read] = '\0';
 		if ((p_n = ft_strchr(buf, '\n')))
-		{
-			*p_n = '\0';
-			++p_n;
-			tmp = remainder;
-			remainder = ft_strdup(p_n);
-			free(tmp);
-		}
+			ream(&p_n,&remainder);
 		str_join(line, &buf);
 	}
 	return ((byte_was_read == 0) ? 0 : 1);

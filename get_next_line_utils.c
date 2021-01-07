@@ -70,18 +70,6 @@ char		*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char		*ft_strdup(char *src)
-{
-	char *dst;
-
-	if (ft_strlen(src) >= 0)
-		dst = (char *)malloc((ft_strlen(src) + 1));
-	else
-		return (NULL);
-	ft_strcpy(dst, src);
-	return (dst);
-}
-
 size_t		ft_strlen(const char *s)
 {
 	int i;
